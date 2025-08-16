@@ -13,10 +13,10 @@ use rmcp::model::Tool;
 use serde_json::Value;
 
 pub const SWISS_AI_API_HOST: &str = "https://api.swiss-ai-platform.ch";
-pub const SWISS_AI_DEFAULT_MODEL: &str = "llama-3.3-70b-instruct";
+pub const SWISS_AI_DEFAULT_MODEL: &str = "meta/llama-3.3-70b-instruct";
 pub const SWISS_AI_KNOWN_MODELS: &[&str] = &[
-    "llama-3.3-70b-instruct",
-    "llama-4-405b-instruct",
+    "meta/llama-3.3-70b-instruct",
+    "meta/llama-4-405b-instruct",
 ];
 
 pub const SWISS_AI_DOC_URL: &str = "https://docs.swiss-ai-platform.ch/models";
@@ -149,9 +149,9 @@ mod tests {
     fn test_known_models() {
         let metadata = SwissAiProvider::metadata();
         assert!(metadata.known_models.iter()
-            .any(|m| m.name == "llama-3.3-70b-instruct"));
+            .any(|m| m.name == "meta/llama-3.3-70b-instruct"));
         assert!(metadata.known_models.iter()
-            .any(|m| m.name == "llama-4-405b-instruct"));
+            .any(|m| m.name == "meta/llama-4-405b-instruct"));
         assert_eq!(metadata.known_models.len(), 2);
     }
 
@@ -177,7 +177,7 @@ mod tests {
     #[test]
     fn test_from_env_missing_api_key() {
         std::env::remove_var("SWISS_AI_API_KEY");
-        let model = ModelConfig::new_or_fail("llama-3.3-70b-instruct");
+        let model = ModelConfig::new_or_fail("meta/llama-3.3-70b-instruct");
         let result = SwissAiProvider::from_env(model);
         assert!(result.is_err());
     }
@@ -185,10 +185,10 @@ mod tests {
     #[test]
     fn test_constants() {
         assert_eq!(SWISS_AI_API_HOST, "https://api.swiss-ai-platform.ch");
-        assert_eq!(SWISS_AI_DEFAULT_MODEL, "llama-3.3-70b-instruct");
+        assert_eq!(SWISS_AI_DEFAULT_MODEL, "meta/llama-3.3-70b-instruct");
         assert_eq!(SWISS_AI_DOC_URL, "https://docs.swiss-ai-platform.ch/models");
         assert_eq!(SWISS_AI_KNOWN_MODELS.len(), 2);
-        assert!(SWISS_AI_KNOWN_MODELS.contains(&"llama-3.3-70b-instruct"));
-        assert!(SWISS_AI_KNOWN_MODELS.contains(&"llama-4-405b-instruct"));
+        assert!(SWISS_AI_KNOWN_MODELS.contains(&"meta/llama-3.3-70b-instruct"));
+        assert!(SWISS_AI_KNOWN_MODELS.contains(&"meta/llama-4-405b-instruct"));
     }
 }

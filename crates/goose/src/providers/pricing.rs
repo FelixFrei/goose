@@ -348,6 +348,7 @@ pub fn parse_model_id(model_id: &str) -> Option<(String, String)> {
             "perplexity" => "perplexity",
             "deepseek" => "deepseek",
             "groq" => "groq",
+            "swiss-ai" => "swiss-ai",
             "nvidia" => "nvidia",
             "microsoft" => "azure",
             "replicate" => "replicate",
